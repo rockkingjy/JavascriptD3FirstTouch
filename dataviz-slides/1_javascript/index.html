@@ -1,0 +1,315 @@
+<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=1024" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    
+    <link rel="stylesheet/less" type="text/css" href="./less/style.less" />
+    
+    <script type="text/javascript">
+        less = {
+            env: "development", // or "production"
+            async: false,       // load imports async
+            fileAsync: false,   // load imports async when in a page under
+                                // a file protocol
+            poll: 1000,         // when in watch mode, time in ms between polls
+            functions: {},      // user functions, keyed by name
+            dumpLineNumbers: "comments", // or "mediaQuery" or "all"
+            relativeUrls: false,// whether to adjust url's to be relative
+                                // if false, url's are already relative to the
+                                // entry less file
+            rootpath: ""// a path to add on to the start of every url
+                                //resource
+        };
+    </script>
+    <script src="../lib/less-1.3.3.min.js"></script>
+    <script src="../lib/jquery-1.9.1.min.js"></script>
+    <script src="../lib/bigtext.js"></script>
+    <script src="../lib/jquery.awesomeCloud-0.2.js"></script>
+    
+    <script src="../lib/chillin/bin/chillin.js"></script>
+    
+    <script src="../js/presentation.js"></script>
+</head>
+<body class="impress-not-supported">
+    
+    <div id="impress">
+
+
+        <div id="js-1" class="step">
+            <h1>JavaScript</h1>
+
+            <div class="mini">A tale about an omnipresent language.</div>
+        </div>
+
+        <div id="js-omnipresent-1" class="step" data-style="dive">
+
+        </div>
+
+        <div id="js-omnipresent-2" class="step" data-style="same">
+            <span>JavaScript is originally found in the browsers, but also</span>
+
+            <ul class="focus-only mini">
+                <li>In browser extensions: like Chrome</li>
+                <li>Server side: Node</li>
+                <li>In the database: MongoDB</li>
+                <li>In the command line: through NPM packages</li>
+                <li>In music production tools: like Max/MSP</li>
+                <li>In desktop client, thanks to Node Webkit: like Popcorn Time</li>
+                <li>In microcontrollers: Tessel</li>
+            </ul>
+        </div>
+
+        <div id="js-key-concept" class="step">
+            JavaScript is:
+            <ul>
+                <li class="focus-only">Event driven</li>
+            </ul>
+        </div>
+
+        <div id="js-event-loop" class="step">
+            <ol>
+                <li>Script is loaded</li>
+                <li>Any execution can bind new listeners on events</li>
+                <li>The event loop:
+                    <ol class="mini">
+                        <li>Takes an incoming event</li>
+                        <li>Fires the relevant listeners if any</li>
+                    </ol>
+                </li>
+            </ol>
+        </div>
+
+        <div id="js-event-loop-event" class="step">
+            <div>An event:
+            <ul>
+                <li>A target</li>
+                <li>A type</li>
+                <li>Attached data</li>
+            </ul>
+            </div>
+        </div>
+
+        <div id="js-event-loop-scheme" class="step">
+            <div class="center">
+                <img src="./img/JavaScript-event-loop.png" alt=""/>
+            </div>
+        </div>
+
+        <div id="js-event-loop-exercize" class="step">
+            <span class="emphasis">Practice:</span> How would you implement an event loop?
+        </div>
+
+        <div id="js-event-loop-exercize-help" class="step" data-y="%+200">
+            <div class="focus-only">
+                <ul>
+                    <li>Key data structures?</li>
+                    <li>Key interfaces?</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="js-event-exercize" class="step">
+
+            <script src="javascript.js"></script>
+            <pre class="code">
+                &lt;button id="myButton" type="button">Click Me!&lt;/button>
+
+                &lt;script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js">
+                &lt;/script>
+
+                &lt;script>
+                    $(document).ready(function() {
+                        console.log('A/ The document is ready');
+                        $('#myButton').bind('click', function() {
+                            console.log('B/ My button has been clicked');
+                        })
+                    });
+                    console.log('C/ my script has been loaded');
+                &lt;/script>
+            </pre>
+        </div>
+
+        <div id="js-event-exercize-explain" class="step" data-z="%+200" data-y="%+100">
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+
+            <ul class="focus-only mini">
+                <li>What log order do you expect</li>
+                <li>Explain the order of the logs in the console</li>
+                <li>Alter the code to display a different message for odd and even clicks number.</li>
+            </ul>
+
+        </div>
+
+        <div id="js-singlethread" class="step">
+            <div>A <span class="emphasis">single thread</span> with outside
+                events altering the current state.</div>
+
+            <br/>
+
+            <div class="mini">A good approximation of reality.</div>
+        </div>
+
+        <div id="js-callbacks" class="step">
+            <h3>Callbacks / closures</h3>
+
+            <p>A function that we manipulate like a variable.</p>
+
+            <pre class="code">
+                function handleClick() {
+                    console.log('My button has been clicked');
+                }
+
+                function bindListener() {
+                    $('#myButton').bind('click', handleClick);
+                }
+
+                $(document).ready(bindListener);
+            </pre>
+        </div>
+
+        <div id="js-scope" class="step">
+            <p>Variables have a scope.</p>
+
+            <pre class="code">
+$(document).ready(function() {
+    var i = 0;
+
+    $('#myButton').bind('click', function() {
+        console.log('My button has been clicked ' + i +
+            ' times before.');
+        i += 1
+    })
+});
+            </pre>
+        </div>
+
+        <div id="js-scope-exercize" class="step" data-y="%+200">
+            <br/><br/><br/>
+            <div class="focus-only">
+                <div class="emphasis">Practice</div>
+                <pre class="code">
+for (var counter = 0; counter < 6; counter++) {
+    setTimeout(function() {
+        console.log('I have waited ' + counter + ' seconds.');
+    }, counter * 1000);
+}
+                </pre>
+            </div>
+        </div>
+
+
+        <div id="js-web-dom" class="step">
+            <h3>DOM: Document Object Model</h3>
+
+            <p>Look in your console.</p>
+
+            <div class="mini">Browser specific</div>
+        </div>
+
+        <div id="js-web-ajax" class="step">
+            <h3>AJAX: Asynchronous JavaScript and XML</h3>
+
+            At a glance:
+            <ul>
+                <li>Requests from the browser in JavaScript</li>
+                <li>Not linked with XML</li>
+            </ul>
+
+            <div class="mini">Browser specific</div>
+        </div>
+
+        <div id="js-web-ajax-hello-world" class="step">
+            <h3>AJAX: Hello World</h3>
+            <pre class="code">
+$.ajax('/data/hello.json');
+            </pre>
+            <pre class="code">
+console.log($.ajax('/data/hello.json'));
+            </pre>
+
+            <pre class="code">
+var request = {
+    url: '/data/hello.json',
+    dataType: 'json'
+};
+$.ajax(request).done(function(responseData, status, fullResponse) {
+    console.log(responseData);
+    console.log('status:' + status);
+    console.log(fullResponse);
+});
+            </pre>
+        </div>
+
+        <div id="js-practice" class="step">
+            <h1>Practice</h1>
+        </div>
+
+        <div id="js-exercize-1" class="step">
+            <div><span class="emphasis">Practice:</span>
+            Multiple query with different wait time.</div>
+
+            <pre class="code">
+                node code/1_javascript/randomnumber.js
+            </pre>
+
+            <ol class="mini">
+                <li>On button clicked, send ten requests to /random</li>
+                <li>Compute an average
+                    <ol>
+                        <li>Weight the value by 2 if the response is received at the right position</li>
+                        <li>Weight the value by 1 otherwise</li>
+                    </ol>
+                </li>
+                <li>Display this average</li>
+            </ol>
+        </div>
+
+        <div id="js-exercize-2" class="step">
+            <div><span class="emphasis">Practice:</span>
+            Data Aggregation.</div>
+
+            <div>Load 300 from <span class="mini">'./data/buy-vs-rent-data/*.json'</span></div>
+
+            <ol class="mini">
+                <li>Aggregate on two levels "marital status" and "home type"</li>
+                <li>Count: entry count</li>
+                <li>Data: output-cumulatedCostsBuy_homeAcquisitionCosts_1 average</li>
+            </ol>
+        </div>
+
+        <div id="js-conclusion" class="step">
+            <h1>Conclusion</h1>
+        </div>
+
+        <div id="js-stack" class="step">
+            <div>A few elements from the JavaScript stack for your curiosity</div>
+            <ul class="mini">
+                <li><span class="emphasis">Environments</span>: Chrome, Node</li>
+                <li><span class="emphasis">Dependency Manager</span>: NPM, Bower</li>
+                <li><span class="emphasis">Front-end libraries</span>: jQuery, Zepto</li>
+                <li><span class="emphasis">Front-end frameworks</span>: Angular, Ember, React</li>
+                <li><span class="emphasis">End-to-end frameworks</span>: Meteor</li>
+                <li><span class="emphasis">"Related" languages</span>: ES6, Coffeescript</li>
+                <li><span class="emphasis">Command line tools</span>: Grunt</li>
+                <li><span class="emphasis">Testing</span>: Mocha, Karma, Protractor</li>
+            </ul>
+        </div>
+
+
+
+        
+        <div id="overview" class="step" data-style="overview">
+        </div>
+    </div>
+    
+    <script src="../lib/impress.js"></script>
+    <script>$(document).ready(function() {
+        $(document).chillin();
+        impress().init();
+    });</script>
+</body>
+</html>

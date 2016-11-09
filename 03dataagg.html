@@ -1,0 +1,132 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js">
+</script>
+
+<script>
+//python -m SimpleHTTPServer 8000
+//http://localhost:8000/03dataagg.html
+//127.0.0.1:8000/
+var DataAggregator = function() {
+
+    this._numberToRequest = 300;
+
+    this._aggregationDimensions = ['input-homeType', 'input-maritalStatus'];
+
+
+    this._dataByAggregation = {};
+
+    this._responseCount = 0;
+
+    this._init = function() {
+        this._triggerRequests();
+    };
+
+    this._triggerRequests = function() {
+        this._responseCount = 0;
+        for (var i = 0; i < this._numberToRequest; i++) {
+            var formattedNumber = (i + 1) + '';
+            while (formattedNumber.length < 5) {
+                formattedNumber = '0' + formattedNumber;
+            }
+            
+            var url =
+                '/data/item-' + formattedNumber + '.json';
+
+            var request = {
+                url: url,
+                dataType: 'json'
+            };
+            var objectRef = this;
+            $.ajax(request).done(function(data) {
+                objectRef._loadResponseData(data);
+            });
+        }
+    };
+
+    this._loadResponseData = function(data) {
+        var currentDataLevel = this._dataByAggregation;
+        for (var aggregationDimensionIndex in this._aggregationDimensions) {
+            var aggregationDimension =
+                this._aggregationDimensions[aggregationDimensionIndex];
+            var aggregationValue = data[aggregationDimension];
+
+            if (!(aggregationValue in currentDataLevel)) {
+                currentDataLevel[aggregationValue] = {};   
+                if (aggregationDimensionIndex == this._aggregationDimensions.length -1 ) {
+                    currentDataLevel[aggregationValue] = [];
+                }
+            }
+            currentDataLevel = currentDataLevel[aggregationValue];
+        }
+        currentDataLevel.push(data);
+        this._responseCount += 1;
+        if (this._responseCount == this._numberToRequest) {
+            this._displayResult();
+        }
+    };
+
+    this._displayResult = function() {
+         var aggregationValues =
+            this._getAggregationValues(this._dataByAggregation);
+        for (var aggregationValueIndex in aggregationValues) {
+            var aggregationValue = aggregationValues[aggregationValueIndex];
+            var currentDataLevel = this._dataByAggregation;
+            for (var aggregationItemIndex in aggregationValue ) { // 'new', 'married' ...
+                var aggregationItem = aggregationValue[aggregationItemIndex];
+                currentDataLevel = currentDataLevel[aggregationItem]
+            }
+            console.log(
+                aggregationValue.join(' '),
+                this._getAggregationResultsFromResponseArray(currentDataLevel)
+            );
+        }
+    };
+
+    /**
+     * Will return something like
+     * [
+     *      ['new', 'single'],
+     *      ['new', 'married']
+     * ]
+     */
+    this._getAggregationValues = function(data) {
+        var aggregationValues = []; 
+        var rootValues = Object.keys(data);
+        for (var rootValue in data) {
+            var subData = data[rootValue];
+            if ('indexOf' in subData) { // is an array
+                return rootValues.map(function(item) {
+                    return [item];
+                });
+            }
+
+            // is an object
+            var subAggregationValues = 
+                this._getAggregationValues(data[rootValue]);
+            for (var subAggregationValueIndex in subAggregationValues) {
+                var subAggregationValue = subAggregationValues[subAggregationValueIndex];
+                var aggregationValue = subAggregationValue.slice(0);
+                aggregationValue.unshift(rootValue); 
+                aggregationValues.push(aggregationValue);
+            }
+        }
+        
+        return aggregationValues;
+    }
+
+    this._getAggregationResultsFromResponseArray = function(responseArray) {
+        var sum = 0;
+        var count = 0;
+        responseArray.map(function(item) {
+            sum += item['output-cumulatedCostsBuy_costOfBuying_1'];
+            count += 1;
+        });
+        return sum / count;
+    };
+
+    this._init();
+
+}
+
+var dataAggregator = new DataAggregator();
+
+</script>

@@ -1,0 +1,126 @@
+/* http://www.colourlovers.com/palette/49963/let_them_eat_cake */
+
+@page-background: #ECE5CE;
+@overlay-background-color: rgba(224, 142, 121, 0.95);
+@overlay-color: #ECE5CE;
+@border-color: #774F38;
+@title-color: #E08E79;
+
+body {
+  
+  background-color: @page-background;
+  background-color: #026873;
+  background-image: url('../../img/subtle_grunge.png');
+  background-repeat: repeat;
+  
+  font-family: sans-serif;
+  font-size: 4em;
+}
+
+.step {
+  width: 1048px;
+}
+
+.focus-only {
+  .transition(~"opacity 1s ease-in-out");
+  opacity: 0.0;
+}
+
+.present .focus-only {
+    opacity: 1.0;
+}
+
+.mini {
+  font-size: 0.5em;
+  font-style: italic;
+}
+
+.center {
+  text-align: center;
+}
+
+.emphasis {
+  .transition-property(transform);
+  .transition-duration(1.5s);
+  display: inline-block;
+  
+  text-shadow: 2px 2px @border-color;
+  color: @title-color;
+}
+
+.emphasis-1, .emphasis-2 {
+  .emphasis;
+}
+
+.present {
+
+  .emphasis-1 {
+    .rotateZ(-3deg);
+  }
+  .emphasis-2 {
+    .rotateZ(2deg)
+  }
+}
+
+.words-cloud {
+  margin-top: -50px;
+  margin-left: 50px;
+  width: 700px;
+  height: 500px;
+}
+
+.overlay {
+  border: 10px solid @border-color;
+  .border-radius(30px);
+  background-color: @overlay-background-color;
+  padding: 30px;
+  color: @overlay-color;
+  text-shadow: 2px 2px @border-color;
+}
+
+.left {
+  position: relative;
+  float: left;
+  width: 49.5%;
+}
+
+.right {
+  position: relative;
+  float: right;
+  width: 49.5%;
+}
+
+pre {
+  white-space: pre-wrap;
+  font-size: 0.35em;
+  &.bigger {
+    font-size: 0.5em;
+  }
+}
+
+img.background {
+  .border-radius(15px);
+  height:auto;
+  width: 100%;
+}
+
+img {
+  max-width: 16em;
+}
+
+img.full-width {
+  width: 16em;
+}
+
+li {
+  padding: 10px;
+}
+
+
+
+h1, h2, h3, h4, h5, h6 {
+  margin-bottom: 10px;
+  text-shadow: 2px 2px @border-color;
+  color: @title-color;
+}
+

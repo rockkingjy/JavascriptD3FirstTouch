@@ -1,0 +1,42 @@
+<button id="myButton" type="button">Click Me!</button>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js">
+</script>
+
+<script>
+//python -m SimpleHTTPServer 8000
+//http://localhost:8000/01start.html
+//127.0.0.1:8000/
+
+	$(document).ready(function(){
+		var cc=0;		
+		console.log('A/ The document is ready');
+		$('#myButton').bind('click',function(){
+			cc += 1;
+			if(cc%2==0){
+				console.log('B/ even');
+			} else {
+				console.log('B/ odd');
+			}
+			console.log('B/ My button has been clicked');
+			
+			var defineTimer = function(waitInSeconds) {
+				setTimeout(function(){
+					console.log('I have waited ' + counter + 's');
+					console.log('------');
+				},waitInSeconds*1000)
+			}
+			for (var counter=0;counter<6;counter++){
+				defineTimer(counter)
+			}
+			/*
+			for (var counter=0;counter<6;counter++){
+				setTimeout(function(){
+					console.log('I have waited ' + counter + 's');
+					console.log('------');
+				},counter*1000)
+			}
+			*/
+		})
+	});
+	console.log('C/ my script has been loaded');
+</script>

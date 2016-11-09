@@ -1,0 +1,146 @@
+<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=1024" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+
+    <link rel="stylesheet/less" type="text/css" href="./less/style.less" />
+
+    <script type="text/javascript">
+        less = {
+            env: "development", // or "production"
+            async: false,       // load imports async
+            fileAsync: false,   // load imports async when in a page under
+                                // a file protocol
+            poll: 1000,         // when in watch mode, time in ms between polls
+            functions: {},      // user functions, keyed by name
+            dumpLineNumbers: "comments", // or "mediaQuery" or "all"
+            relativeUrls: false,// whether to adjust url's to be relative
+                                // if false, url's are already relative to the
+                                // entry less file
+            rootpath: ""// a path to add on to the start of every url
+            //resource
+        };
+    </script>
+    <script src="../lib/less-1.3.3.min.js"></script>
+    <script src="../lib/jquery-1.9.1.min.js"></script>
+    <script src="../lib/bigtext.js"></script>
+    <script src="../lib/jquery.awesomeCloud-0.2.js"></script>
+
+    <script src="../lib/chillin/bin/chillin.js"></script>
+
+    <script src="../js/presentation.js"></script>
+</head>
+<body class="impress-not-supported">
+
+<div id="impress">
+
+
+    <div id="d3" class="step">
+        <h1>Now let's dive in D3.js</h1>
+    </div>
+
+    <div id="d3-data-driven-documents" class="step">
+        <h3>D3.js</h3>
+
+        <div>Data Driven Documents</div>
+
+    </div>
+
+
+    <div id="d3-effort-result-ratio" class="step">
+        <h3>D3.js: effort result ratio</h3>
+
+        <br/>
+
+        <div>1 vs 99 &rarr; <span class="emphasis">Pareto rule applies</span></div>
+    </div>
+
+    <div id="d3-flow" class="step">
+        <ul>
+            <li>Nodes</li>
+            <li>Data</li>
+            <li>Transition</li>
+        </ul>
+    </div>
+
+    <div id="d3-hello-world" class="step">
+        <div class="emphasis">Practice</div>
+        <ol>
+            <li>code/4_d3/1.html</li>
+            <li>Explain</li>
+            <li>Implement an update</li>
+            <li>Implement a transition on update</li>
+            <li>Implement a transition on exit</li>
+        </ol>
+    </div>
+
+    <div id="d3-methods-returns" class="step">
+        <h3>Methods returns</h3>
+
+        <div class="mini">Make the difference between methods:</div>
+
+        <ul>
+            <li>Conserving the selection:
+                <div class="mini">attr, style, ...</div></li>
+            <li>Specifying the selection:
+                <div class="mini">selectAll, enter, update, ...</div></li>
+        </ul>
+    </div>
+
+    <div id="d3-scales" class="step">
+        <h3>Scales</h3>
+
+        <div><span class="emphasis">Practice</span>: use</div>
+
+        <pre class="code">
+            var myScale = d3.scale.linear().domain([0,25]).range([0,100]);
+        </pre>
+    </div>
+
+    <div id="d3-layout-shapes" class="step">
+        <h3>Layout & Shapes</h3>
+
+        <div><span class="emphasis">Practice</span>: use code/2</div>
+
+        <ul>
+            <li>Extract a working Pie Chart</li>
+            <li>Add a label at the center of the section</li>
+        </ul>
+    </div>
+
+    <div id="d3-interactions" class="step">
+        <div><span class="emphasis">Practice</span>: handle interactions on the pie</div>
+
+        <pre class="code">
+.on("mouseover", function(){
+    d3.select(this).style("fill","green"); })
+.on("mouseout", function(){
+    d3.select(this).style("fill","blue");
+});
+        </pre>
+    </div>
+
+    <div id="d3-final-exercize" class="step">
+        <h3>Practice</h3>
+
+        <div>Monte-Carlo simulation of &pi;</div>
+
+        <ol>
+            <li>We generate points by batch of five (through a button)</li>
+            <li>We plot the simulation area</li>
+            <li>We plot the value of the estimated following each iteration</li>
+        </ol>
+    </div>
+
+    <div id="overview" class="step" data-style="overview">
+    </div>
+</div>
+
+<script src="../lib/impress.js"></script>
+<script>$(document).ready(function() {
+    $(document).chillin();
+    impress().init();
+});</script>
+</body>
+</html>

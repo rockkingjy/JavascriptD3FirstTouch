@@ -1,0 +1,61 @@
+<button id="myButton" type="button">Click Me!</button>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js">
+</script>
+
+<script>
+/*
+D'avoir un environnement Linux/Unix viable
+Un environnement Python (avec PIP et easy_install) fonctionnant
+Un environnement Node (avec NPM)
+Bower installé et fonctionnel
+D'avoir executé dans un dossier pour le projet la commande `bower install bootstrap jquery d3 nvd3`
+D'avoir fait tourner un serveur Python `python -m SimpleHTTPServer 8000`
+*/
+
+
+//python -m SimpleHTTPServer 8000
+//http://localhost:8000/02ajax.html
+//127.0.0.1:8000/
+
+/*
+$.ajax('./data/hello.json');
+console.log($.ajax('./data/hello.json'));
+
+var request = {
+	url: './data/hello.json',
+	dataType: 'json'
+};
+
+for (var counter=0;counter<10;counter++){
+	$.ajax(request).done(function(responseData, status, fullResponse) {
+		console.log(responseData);
+		console.log('status:'+status);
+		console.log(fullResponse);
+	});
+}
+*/
+var bindListener = function(){
+	$('#myButton').bind('click',onButtonClicked);
+};
+
+var sum = 0;
+var responseCount = 0;
+
+var handlerNumberReponse = function(returnedValue) {
+	sum += parseInt(returnedValue);
+	responseCount += 1;
+	if(responseCount == 10) {
+		console.log(sum/10);
+	}
+};
+var onButtonClicked = function() {
+	for (var counter=0;counter<10;counter++){
+		$.ajax('02number').done(handlerNumberReponse);
+	}
+}
+
+$(document).ready(bindListener);
+
+</script>
+
+
